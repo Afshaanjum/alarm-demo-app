@@ -1,0 +1,29 @@
+# Docker Compose for Alarm Demo App
+version: '3.8'
+
+services:
+  alarm-demo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    restart: unless-stopped
+    container_name: alarm-demo-app
+
+  # Optional: Add a development service
+  alarm-demo-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "4201:4200"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+    container_name: alarm-demo-dev
+    profiles:
+      - dev

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alarm-demo-config
+data:
+  APP_TITLE: "Alarm Demo"
+  ALARM_TEXT: "🚨 Alarm!"

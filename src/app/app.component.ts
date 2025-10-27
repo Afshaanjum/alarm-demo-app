@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { FaviconService } from './favicon.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'alarm-demo';
+  constructor(private faviconService: FaviconService) {}
+
+  triggerAlarm() {
+    document.title = "🚨 Alarm! | My App";
+    this.faviconService.setAlarmFavicon();
+  }
+
+  @HostListener('window:focus', [])
+  reset() {
+    document.title = "My App";
+    this.faviconService.resetFavicon();
+  }
 }
